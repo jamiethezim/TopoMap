@@ -70,7 +70,7 @@ void WriteData(Image *img, char *filename)
 		// get the pixel's elevation data point
 		int elev = MapToElevation(img->pixel[i]);
 		//write it to the txt file
-		fprintf(f_out, "%d", elev);
+		fprintf(f_out, "%d\n", elev);
 	}
 	fclose(f_out);
 }
