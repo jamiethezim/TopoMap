@@ -1,13 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
-
-/*
-ReadImage -> input is pnm file, reads pixel data, creates Image object
-
-
-*/
+int count = 0;
 
 typedef struct{
 //3 bytes
@@ -50,7 +44,9 @@ Image * ReadImage(char *filename)
 	return image;
 }
 
+int MapEpsilon(unsigned char r, unsigned char g, unsigned char b){
 
+}
 int MapToElevation(Pixel pixel){
 	// get pixel's  R, G, and B values
 	//convert them to an elevation point
@@ -178,7 +174,14 @@ int MapToElevation(Pixel pixel){
 	else if (180<= pixel.r && pixel.r<=200  &&  5<=pixel.g && pixel.g<=5  &&  15<=pixel.b && pixel.b<=25){
 		return 247; //should be 246.5
 	}
+	else if (pixel.r < 5 && pixel.g < 5 && pixel.b < 5){
+		return 0;
+	}
+	else if (250 <= pixel.r && 250 <= pixel.g && 250 <= pixel.b){
+		return 255;
+	}
 	else{
+		count++;
 		return 100;
 	}
 }
@@ -198,6 +201,7 @@ void WriteData(Image *img, char *filename)
 		fprintf(f_out, "%c%c%c", elev, elev, elev);
 	}
 	fclose(f_out);
+	fprintf(stdout, "failures: %d, the error rate is %f\n", count, count/(img->width*img->height));
 }
 
 
