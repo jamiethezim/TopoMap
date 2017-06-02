@@ -9,6 +9,8 @@ ReadImage -> input is pnm file, reads pixel data, creates Image object
 
 */
 
+int ctr = 0;
+
 typedef struct{
 //3 bytes
 	unsigned char r;
@@ -52,136 +54,165 @@ Image * ReadImage(char *filename)
 
 
 int MapToElevation(Pixel pixel){
+
 	// get pixel's  R, G, and B values
-	//convert them to an elevation point
+	// convert them to an elevation point
 	// red = 50
 	// blue = 1, etc, something like that
-	//return an int, the elevation point
-	if (pixel.g == 0){
-		if (25 <= pixel.r && pixel.r <= 50){
-			if (140 < pixel.b  && pixel.b< 170){
+	// return an int, the elevation point
+
+
+	if ((0 <= pixel.r) && (pixel.r <= 5)) {
+		// return 0;
+		if ((0 <= pixel.g) && (pixel.g <= 20)) {
+			if ((0 <= pixel.b) && (pixel.b <= 180)) {
 				return 0;
 			}
-			if (180 < pixel.b && pixel.b< 205){
-				return 9; // should be 8.5
+			else if ((181 <= pixel.b) && (pixel.b <= 215)) {
+				return 9;
 			}
-		}
-		if (55 < pixel.r && pixel.r < 60){
-			if (220 < pixel.b && pixel.b< 250){
+			else if ((216 <= pixel.b) && (pixel.b <= 225)) {
 				return 17;
 			}
-			if (250 < pixel.b && pixel.b< 255){
-				return 43; //should be 42.5
+			else if ((226 <= pixel.b) && (pixel.b <= 255)) {
+				return 26;
+			}
+			else {
+				ctr++;
+				printf("MISSED PIXELS: %d", ctr);
+
 			}
 		}
-		if (60 < pixel.r && pixel.r< 65){
-			if (250 < pixel.b && pixel.b< 255){
-				return 26; //should be 25.5
+		else {	// 20 <= pixel.g <= 255
+			if ((0 <= pixel.g) && (pixel.g <= 35)) {
+				return 34;
 			}
-		}
-	}
-	else if (55 < pixel.g && pixel.g< 80){
-		if (35 < pixel.r && pixel.r< 45){
-			if (250 < pixel.b && pixel.b< 255){
+			else if ((36 <= pixel.g) && (pixel.g <= 70)) {
+				return 43;
+			}
+			else if ((71 <= pixel.g) && (pixel.g <= 100)) {
 				return 51;
 			}
-		}
-	}
-	else if (110 < pixel.g && pixel.g< 122){
-		if (pixel.r == 0){
-			if (250 < pixel.b && pixel.b< 255){
-				return 60; //should be 59.5
+			else if ((101 <= pixel.g) && (pixel.g <= 145)) {
+				return 60;
 			}
-		}
-	}
-	else if (150 < pixel.g && pixel.g< 120){
-		if (pixel.r == 0){
-			if (250 < pixel.b && pixel.b< 255){
+			else if ((146 <= pixel.g) && (pixel.g <= 170)) {
 				return 68;
 			}
-		}
-	}
-	else if (185 < pixel.g && pixel.g< 197){
-		if (pixel.r == 0){
-			if (250 < pixel.b && pixel.b< 255){
-				return 77; //should be 76.5
+			else if ((171 <= pixel.g) && (pixel.g <= 255)) {	// fix me
+				return 77;
+			}
+			else {
+				ctr ++;
+				printf("MISSED PIXELS: %d", ctr);
+
 			}
 		}
 	}
-	else if (225 < pixel.g && pixel.g< 235){
-		if (pixel.r == 0){
-			if (250 < pixel.b && pixel.b< 255){
-				return 85;
-			}
+
+	if ((6 <= pixel.r) && (pixel.r <= 10)) {
+		// return 94;
+		if ((0 <= pixel.g) && (pixel.g <= 200)) {
+			return 85;
+		}
+		else {
+			return 94;
 		}
 	}
-	else if (pixel.g == 255){
-		if (pixel.r == 0){
-			if (250 < pixel.b && pixel.b< 255){
-				return 94; //should be 93.5
+
+	else if ((10 <= pixel.r) && (pixel.r <= 65)) {
+		if ((0 <= pixel.b) && (pixel.b <= 200)) {	// fix me
+			return 111;
+		}
+		else if ((201 <= pixel.b) && (pixel.b <= 255)) {
+			return 102;
+		}
+		else {
+			ctr++;
+			printf("MISSED PIXELS: %d", ctr);
+
+		}
+	}
+
+	else if ((66 <= pixel.r) && (pixel.r <= 200)) {
+		if ((0 <= pixel.g) && (pixel.g <= 200)) {	// fix me
+			return 247;
+		}
+
+		else {
+			if ((0 <= pixel.b) && (pixel.b <= 70)) {
+				return 145;
 			}
-			if (200 < pixel.b && pixel.b< 235){
-				return 102;
+			else if ((71 <= pixel.b) && (pixel.b <= 100)) {
+				return 136;
 			}
-			if (170 < pixel.b && pixel.b< 200){
-				return 111; //should be 110.5
+			else if ((101 <= pixel.b) && (pixel.b <= 145)) {
+				return 128;
 			}
-			if (145 < pixel.b && pixel.b< 165){
+			else if ((146 <= pixel.b) && (pixel.b <= 255)) {
 				return 119;
 			}
-		}
-		if (pixel.r < 70){
-			if (120 < pixel.b && pixel.b< 140){
-				return 128; //should be 127.5
+			else {
+				ctr++;
+				printf("MISSED PIXELS: %d", ctr);
 			}
 		}
+
 	}
-	else if (251 <= pixel.g && pixel.g <= 254  &&  157 <= pixel.r && pixel.r<=168  &&  93 <= pixel.b && pixel.b<= 107){
-		return 136;
+
+	else if ((201 <= pixel.r) && (pixel.r <= 245)) {
+		if ((0 <= pixel.g) && (pixel.g <= 10)) {
+			return 238;
+		}
+		else if ((10 <= pixel.g) && (pixel.g <= 255)) {		// fix me
+			return 153;
+		}
+		else {
+			ctr++;
+			printf("MISSED PIXELS: %d", ctr);
+
+		}
 	}
-	else if (186<= pixel.r && pixel.r <=194  &&  251<=pixel.g && pixel.g<=254  &&  72<=pixel.b && pixel.b <=85){
-		return 145; //should be 144.5
+
+	else if ((246 <= pixel.r) && (pixel.r <= 255)) {
+		if ((0 <= pixel.g) && (pixel.g <= 30)) {
+			return 221;
+		}
+		else if ((31 <= pixel.g) && (pixel.g <= 70)) {
+			return 213;
+		}
+		else if ((71 <= pixel.g) && (pixel.g <= 100)) {
+			return 204;
+		}
+		else if ((101 <= pixel.g) && (pixel.g <= 145)) {
+			return 196;
+		}
+		else if ((146 <= pixel.g) && (pixel.g <= 165)) {
+			return 187;
+		}
+		else if ((166 <= pixel.g) && (pixel.g <= 200)) {
+			return 179;
+		}
+		else if ((201 <= pixel.g) && (pixel.g <= 230)) {
+			return 170;
+		}
+		else if ((231 <= pixel.g) && (pixel.g <= 255)) {
+			return 162;
+		}
+		else {
+			ctr++;
+			printf("MISSED PIXELS: %d", ctr);
+
+		}
 	}
-	else if (218<= pixel.r && pixel.r <=225  &&  251<=pixel.g && pixel.g<=255  &&  60<=pixel.b && pixel.b<=67){
-		return 153;
+	else {
+		ctr ++;
+		printf("MISSED PIXELS: %d", ctr);
+
 	}
-	else if (250<= pixel.r && pixel.r<=255  &&  249<=pixel.g && pixel.g<=253  &&  56<=pixel.b && pixel.b <=59){
-		return 162; //should be 161.5
-	}
-	else if (242<= pixel.r && pixel.r<=255  &&  212<=pixel.g && pixel.g<=230  &&  47<=pixel.b && pixel.b <=54){
-		return 170;
-	}
-	else if (241<= pixel.r && pixel.r<=255  &&  180<=pixel.g && pixel.g<=194  &&  42<=pixel.b && pixel.b <=70){
-		return 179; //should be 178.5
-	}
-	else if (250<= pixel.r && pixel.r<=255  &&  150<=pixel.g && pixel.g<=166  &&  38<=pixel.b && pixel.b<=43){
-		return 187;
-	}
-	else if (237<= pixel.r && pixel.r<=255  &&  124<=pixel.g && pixel.g<=138  &&  30<=pixel.b && pixel.b <=40){
-		return 196; //should be 195.5
-	}
-	else if (240<= pixel.r && pixel.r<=255  &&  91<=pixel.g && pixel.g<=100  &&  29<=pixel.b && pixel.b<=35){
-		return 204;
-	}
-	else if (241<= pixel.r && pixel.r<=255  &&  60<=pixel.g && pixel.g<=70  &&  25<=pixel.b && pixel.b<=32){
-		return 213; //should be 212.5
-	}
-	else if (250<= pixel.r && pixel.r<=255  &&  30<=pixel.g && pixel.g<=37  &&  25<=pixel.b && pixel.b<=34){
-		return 221;
-	}
-	else if (225<= pixel.r && pixel.r<=250  &&  10<=pixel.g && pixel.g<=20  &&  27<=pixel.b && pixel.b<=29){
-		return 230; //should be 229.5
-	}
-	else if (200<= pixel.r && pixel.r<=225  &&  8<=pixel.g && pixel.g<=11  &&  25<=pixel.b && pixel.b<=27){
-		return 238;
-	}
-	else if (180<= pixel.r && pixel.r<=200  &&  5<=pixel.g && pixel.g<=5  &&  15<=pixel.b && pixel.b<=25){
-		return 247; //should be 246.5
-	}
-	else{
-		return 100;
-	}
+
 }
+
 
 
 void WriteData(Image *img, char *filename)
