@@ -38,17 +38,10 @@ Image * ReadImage(char *filename)
 		printf("unable to open file %s\n", filename);
 	}
 	fread(image->pixel, sizeof(Pixel), height*width, f_in);
-	/*
-	for (int i = 0; i<height*width; i++){
-		printf("red value is: %d, green value is: %d, blue value is: %d\n", image->pixel[i].r, image->pixel[i].g, image->pixel[i].b);
-	}*/
 	fclose(f_in);
 	return image;
 }
 
-int MapEpsilon(unsigned char r, unsigned char g, unsigned char b){
-
-}
 int MapToElevation(Pixel pixel){
 
 	// get pixel's  R, G, and B values
@@ -95,7 +88,7 @@ int MapToElevation(Pixel pixel){
 			else if ((146 <= pixel.g) && (pixel.g <= 170)) {
 				return 68;
 			}
-			else if ((171 <= pixel.g) && (pixel.g <= 255)) {	// fix me
+			else if ((171 <= pixel.g) && (pixel.g <= 255)) {	
 				return 77;
 			}
 			else {
@@ -117,7 +110,7 @@ int MapToElevation(Pixel pixel){
 	}
 
 	else if ((10 <= pixel.r) && (pixel.r <= 65)) {
-		if ((0 <= pixel.b) && (pixel.b <= 200)) {	// fix me
+		if ((0 <= pixel.b) && (pixel.b <= 200)) {
 			return 111;
 		}
 		else if ((201 <= pixel.b) && (pixel.b <= 255)) {
@@ -131,7 +124,7 @@ int MapToElevation(Pixel pixel){
 	}
 
 	else if ((66 <= pixel.r) && (pixel.r <= 200)) {
-		if ((0 <= pixel.g) && (pixel.g <= 200)) {	// fix me
+		if ((0 <= pixel.g) && (pixel.g <= 200)) {	
 			return 247;
 		}
 
@@ -160,7 +153,7 @@ int MapToElevation(Pixel pixel){
 		if ((0 <= pixel.g) && (pixel.g <= 10)) {
 			return 238;
 		}
-		else if ((10 <= pixel.g) && (pixel.g <= 255)) {		// fix me
+		else if ((10 <= pixel.g) && (pixel.g <= 255)) {	
 			return 153;
 		}
 		else {
